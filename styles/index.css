@@ -1,0 +1,68 @@
+/* Prevents text from being highlighted/selected */
+.no-select {
+  user-select: none;
+  -webkit-user-select: none; /* Safari */
+}
+
+* {
+  outline: none !important;
+  box-shadow: none !important;
+  -webkit-tap-highlight-color: transparent;
+}
+
+*:focus {
+  outline: none !important;
+  border-color: black !important; /* Keeps your original border color */
+}
+
+
+.container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
+}
+
+.main-heading {
+    font-size: 5em;
+    margin-bottom: 1em;
+}
+
+.url-div {
+  width: 480px;
+}
+
+.result-div {
+  width: 420px;
+}
+
+.submit-btn {
+    background-color: #182b83; /* Green */
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 1rem;
+    border-radius: 6px !important;
+}
+
+.input-error {
+    border: 2px solid #ff4d4d !important;
+    outline: none;
+}
+
+.error-message {
+    color: #ff4d4d;
+    font-size: 0.8rem;
+    margin-top: 4px;
+    display: none; /* Hidden by default */
+}
+
+.error-present {
+    display: block; /* Show message when input has error class */
+}
