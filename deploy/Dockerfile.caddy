@@ -2,7 +2,7 @@
 FROM caddy:2.7-alpine
 
 # Copy your custom Caddyfile
-COPY Caddyfile /etc/caddy/Caddyfile
+COPY deploy/Caddyfile /etc/caddy/Caddyfile
 
 # Create directories for Caddy data and config
 RUN mkdir -p /var/www/scripts /var/www/styles
