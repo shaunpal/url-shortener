@@ -1,0 +1,18 @@
+# To build caddy docker image
+FROM caddy:2.7-alpine
+
+# Copy your custom Caddyfile
+COPY deploy/Caddyfile /etc/caddy/Caddyfile
+
+# Create directories for Caddy data and config
+RUN mkdir -p /data /config
+
+COPY deploy/caddy_data /data
+COPY deploy/caddy_config /config
+
+# Static files for the website
+COPY index.html /var/www/index.html
+COPY scripts /var/www/scripts
+COPY styles /var/www/styles
+
+COPY --from=builder /usr/bin/caddy /usr/bin/caddy
