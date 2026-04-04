@@ -1,0 +1,8 @@
+[build]
+aptPackages = [
+  "g++",
+  "cmake",
+  "libboost-all-dev",
+  "libssl-dev",
+  "libcpprest-dev",
+]
