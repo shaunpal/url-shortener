@@ -13,7 +13,7 @@ RUN apt-get update && apt-get install -y \
     cmake
 
 # Copy the source code into the container
-
+RUN mkdir -p src
 COPY CMakeLists.txt .
 COPY src/ src/
 
