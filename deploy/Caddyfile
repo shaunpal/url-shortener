@@ -1,14 +1,11 @@
 *.onrender.com {
     encode
-    file_server {
-        root /var/www/
-    }
-    handle_path /api/* {
-       reverse_proxy server1:8080 server2:8080 server3:8080 {
-            lb_policy round_robin
-       }
+    root * /var/www/
+    reverse_proxy /api/* server1:8080 server2:8080 server3:8080 {
+       lb_policy round_robin
        health_uri /api/health
        health_interval 5s
        health_timeout 3s
     }
+    file_server
 }
