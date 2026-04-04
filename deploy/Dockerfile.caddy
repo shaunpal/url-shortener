@@ -5,7 +5,7 @@ FROM caddy:2.7-alpine
 COPY Caddyfile /etc/caddy/Caddyfile
 
 # Create directories for Caddy data and config
-RUN mkdir -p /data /config
+RUN mkdir -p /var/www/scripts /var/www/styles
 
 # Static files for the website
 COPY index.html /var/www/index.html
