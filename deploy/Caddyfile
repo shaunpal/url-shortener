@@ -1,13 +1,17 @@
 :80, :443 {
     root * /var/www
     encode gzip
-    file_server
 
+    # Handle API requests first - proxy to backend
     reverse_proxy /api/* http://url-shortener.railway.internal:8080 {
         header_up X-Forwarded-For {http.request.remote}
         header_up X-Forwarded-Proto {http.request.proto}
         header_up X-Forwarded-Host {http.request.host}
     }
 
+    # Serve static files
+    file_server
+
+    # Fall back to index.html for client-side routing (only for non-API requests)
     try_files {path} /index.html
 }
