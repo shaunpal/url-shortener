@@ -41,7 +41,6 @@ services:
       - caddy_data:/data
       - caddy_config:/config
       - ../index.html:/var/www/index.html
-      - ../stats.html:/var/www/static.html
       - ../scripts:/var/www/scripts
       - ../styles:/var/www/styles
     depends_on:
