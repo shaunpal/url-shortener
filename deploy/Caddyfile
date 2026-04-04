@@ -1,11 +1,13 @@
-*.onrender.com {
-    root * /var/www/
+:80, :443 {
+    root * /var/www
     encode gzip
-    reverse_proxy /api/* server1:8080 server2:8080 server3:8080 {
-       lb_policy round_robin
-       health_uri /api/health
-       health_interval 5s
-       health_timeout 3s
-    }
     file_server
+
+    reverse_proxy /api/* http://url-shortener.railway.internal:8080 {
+        header_up X-Forwarded-For {http.request.remote}
+        header_up X-Forwarded-Proto {http.request.proto}
+        header_up X-Forwarded-Host {http.request.host}
+    }
+
+    try_files {path} /index.html
 }
