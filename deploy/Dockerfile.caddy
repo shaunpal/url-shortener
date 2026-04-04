@@ -9,5 +9,5 @@ RUN mkdir -p /var/www/scripts /var/www/styles
 
 # Static files for the website
 COPY index.html /var/www/index.html
-COPY scripts /var/www/scripts
-COPY styles /var/www/styles
+COPY scripts/ /var/www/scripts
+COPY styles/ /var/www/styles
