@@ -40,9 +40,9 @@ services:
       - ./Caddyfile:/etc/caddy/Caddyfile
       - caddy_data:/data
       - caddy_config:/config
-      - ../index.html:/var/www/index.html
-      - ../scripts:/var/www/scripts
-      - ../styles:/var/www/styles
+      - ./index.html:/var/www/index.html
+      - ./scripts:/var/www/scripts
+      - ./styles:/var/www/styles
     depends_on:
       - server
     networks:

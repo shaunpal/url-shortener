@@ -2,7 +2,7 @@
 FROM ubuntu:latest
 
 # Set the working directory in the container
-WORKDIR /build
+WORKDIR /app
 
 # Install necessary dependencies
 RUN apt-get update && apt-get install -y \
@@ -13,7 +13,7 @@ RUN apt-get update && apt-get install -y \
     cmake
 
 # Copy the source code into the container
-
+RUN mkdir -p src
 COPY CMakeLists.txt .
 COPY src/ src/
 
