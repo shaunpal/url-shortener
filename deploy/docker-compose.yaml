@@ -1,0 +1,56 @@
+services:
+  server1:
+    image: server
+    build:
+      context: ../
+      dockerfile: deploy/Dockerfile
+    ports:
+      - "8080:8080"
+    networks:
+      - app_network
+
+  server2:
+    image: server
+    build:
+      context: ../
+      dockerfile: deploy/Dockerfile
+    ports:
+      - "8080:8080"
+    networks:
+      - app_network
+
+  server3:
+    image: server
+    build:
+      context: ../
+      dockerfile: deploy/Dockerfile
+    ports:
+      - "8080:8080"
+    networks:
+      - app_network
+
+  caddy:
+    image: caddy:latest
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp" # Optional: for HTTP/3 support
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+      - caddy_data:/data
+      - caddy_config:/config
+      - ../index.html:/var/www/index.html
+      - ../stats.html:/var/www/static.html
+      - ../scripts:/var/www/scripts
+      - ../styles:/var/www/styles
+    depends_on:
+      - server
+    networks:
+      - app_network
+
+networks:
+  app_network:
+volumes:
+  caddy_data:
+  caddy_config:
