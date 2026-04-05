@@ -16,3 +16,23 @@
        file_server
     }
 }
+
+# For local development, you can use the following Caddyfile configuration.
+# localhost {
+#    root * /var/www
+#    encode gzip
+#
+#    # Handle API requests first - proxy to backend
+#    handle /api/* {
+#        reverse_proxy  localhost:8081 localhost:8082 localhost:8083 {
+#            header_up X-Forwarded-For {http.request.remote}
+#            header_up X-Forwarded-Proto {http.request.proto}
+#            header_up X-Forwarded-Host {http.request.host}
+#        }
+#    }
+#
+#    handle {
+#       try_files {path} /index.html
+#       file_server
+#    }
+#}

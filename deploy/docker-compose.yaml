@@ -5,7 +5,9 @@ services:
       context: ../
       dockerfile: deploy/Dockerfile
     ports:
-      - "8080:8080"
+      - "8080:8081"
+    depends_on:
+      - redis-stack
     networks:
       - app_network
 
@@ -15,7 +17,10 @@ services:
       context: ../
       dockerfile: deploy/Dockerfile
     ports:
-      - "8080:8080"
+      - "8080:8082"
+    depends_on:
+      - redis-stack
+      - db
     networks:
       - app_network
 
@@ -25,7 +30,31 @@ services:
       context: ../
       dockerfile: deploy/Dockerfile
     ports:
-      - "8080:8080"
+      - "8080:8083"
+    depends_on:
+      - redis-stack
+    networks:
+      - app_network
+
+  redis-stack:
+    image: redis/redis-stack:latest
+    ports:
+      - "6379:6379"
+      - "8001:8001"
+    networks:
+      - app_network
+
+
+  db:
+    image: postgres:16-alpine  # Alpine is smaller and efficient
+    container_name: postgres_db
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=url_shortener_db
+    ports:
+      - "5432:5432"
     networks:
       - app_network
 
@@ -44,7 +73,9 @@ services:
       - ./scripts:/var/www/scripts
       - ./styles:/var/www/styles
     depends_on:
-      - server
+      - server1
+      - server2
+      - server3
     networks:
       - app_network
 
