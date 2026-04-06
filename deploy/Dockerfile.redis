@@ -1,0 +1,16 @@
+
+# Use the official Redis image as a base
+FROM redis:latest
+
+# Optional: Copy your custom redis.conf from your host to the container
+# Ensure redis.conf is in the same directory as this Dockerfile
+# COPY redis.conf /usr/local/etc/redis/redis.conf
+
+# Create the data directory (standard for Redis)
+VOLUME /data
+
+# Expose the default Redis port
+EXPOSE 6379
+
+# Start Redis using your custom configuration file
+CMD [ "redis-server", "/usr/local/etc/redis/redis.conf" ]

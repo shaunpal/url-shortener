@@ -1,0 +1,22 @@
+
+# Use the official PostgreSQL image
+FROM postgres:latest
+
+# Optional: Set environment variables for the build
+# (Usually better to pass these at runtime, but you can hardcode defaults)
+ENV POSTGRES_DB=url_shortener_db
+ENV POSTGRES_USER=postgres
+ENV POSTGRES_PASSWORD=postgres
+
+# Optional: Copy initialization scripts (.sql or .sh)
+# Anything in this folder runs automatically when the container starts for the first time
+# COPY ./init-scripts/ /docker-entrypoint-initdb.d/
+
+# Optional: Copy a custom postgresql.conf if you need deep tuning
+# COPY postgresql.conf /etc/postgresql/postgresql.conf
+
+# Standard volume for data persistence
+VOLUME /var/lib/postgresql/data
+
+# Expose the default Postgres port
+EXPOSE 5432
